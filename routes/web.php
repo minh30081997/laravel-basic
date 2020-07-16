@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,33 @@ Route::get('lienketbang', function () {
     });
 
     echo "success";
+});
+
+// Query Builder
+Route::get('qb/get', function () {
+    $data = DB::table('users')->get();
+    foreach ($data as $row) {
+        foreach ($row as $key => $value) {
+            echo $key . ': ' . $value;
+            echo '<br>';
+        }
+
+        echo '<br>';
+    }
+});
+
+// Get 1 field or 1 column
+Route::get('qb/field', function () {
+    $data = DB::table('users')->where('name', 'HP')->first();
+    dd($data);
+});
+
+// Fetch more column in table
+Route::get('qb/fetchMore', function () {
+    $data = DB::table('users')->pluck('id', 'name');
+
+    $data1 = DB::table('users')->select('id', 'name')->get();
+    dd($data);
+    echo '<br>';
+    var_dump($data1);
 });
