@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,4 +76,22 @@ Route::get('qb/fetchMore', function () {
     dd($data);
     echo '<br>';
     var_dump($data1);
+});
+
+// Model
+Route::get('model/save', function () {
+    $user = new User();
+    $user->name = 'Cong';
+    $user->email = 'Cong@gmail.com';
+    $user->password = bcrypt('password');
+
+    $user->save();
+
+    echo 'Save success';
+});
+
+// Model query
+Route::get('model/query', function () {
+    $user = User::find(3);
+    dd($user);
 });
