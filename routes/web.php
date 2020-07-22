@@ -257,3 +257,37 @@ Route::get('user', function () {
 
     dd($user);
 }); 
+
+// Accessor
+Route::get('accessor', function () {
+    $user = User::find(1);
+    echo $user->name;
+    return $upper_name = $user->name;
+});
+
+// Mutator
+// Add user in table users
+Route::get('add/user', function () {
+    $user = new User();
+
+    $user->name = 'min';
+    $user->email = 'min@gmail.com';
+    $user->password = '12345';
+
+    $user->save();
+
+    echo 'Success';
+});
+
+// Add user in table users with mutator
+Route::get('add/user/mutator', function () {
+    $user = new User();
+
+    $user->name = 'min min';
+    $user->email = 'minmin@gmail.com';
+    $user->password = '12345';
+
+    $user->save();
+
+    echo 'Success';
+});

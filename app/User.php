@@ -48,4 +48,16 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
+
+    // Accessor
+    public function getNameAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    // Mutator 
+    public function setPasswordAttribute($value) 
+    {
+        $this-> attributes['password'] = bcrypt($value);
+    }
 }
