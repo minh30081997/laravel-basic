@@ -317,3 +317,10 @@ Route::get('terminable', function () {
     echo '<br>';
     echo 'Success';
 })->middleware('TerminableMiddleware:save success');
+
+
+// Pagination 
+Route::get('paginate', function () {
+    $posts = Post::paginate(2);
+    return view('post')->with(['posts' => $posts]);
+});
