@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    protected $table = 'users';
+
     use Notifiable;
 
     /**
@@ -36,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function post()
+    {
+        return $this->hasMany('App\Post', 'user_id', 'id');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment', 'user_id', 'id');
+    }
 }
