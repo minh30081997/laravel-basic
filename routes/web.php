@@ -291,3 +291,29 @@ Route::get('add/user/mutator', function () {
 
     echo 'Success';
 });
+
+// Middleware
+// Vi du ve nhap diem don gian voi middleware
+Route::get('diem', function () {
+    echo 'Ban da du diem';
+})->middleware('MyMiddleware')->name('diem');
+
+Route::get('loi', function () {
+    echo 'Ban chua du diem';
+})->name('loi');
+
+Route::get('nhapdiem', function () {
+    return view('nhapdiem');
+});
+
+// Pass parameters to middleware
+Route::get('role', function () {
+    echo '<br>';
+    echo 'Success';
+})->middleware('RoleMiddleware:admin');
+
+// Terminable Middleware
+Route::get('terminable', function () {
+    echo '<br>';
+    echo 'Success';
+})->middleware('TerminableMiddleware:save success');
