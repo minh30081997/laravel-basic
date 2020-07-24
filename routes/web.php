@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
 use App\Topic;
@@ -324,3 +325,20 @@ Route::get('paginate', function () {
     $posts = Post::paginate(2);
     return view('post')->with(['posts' => $posts]);
 });
+
+// Auth
+Route::get('dangnhap', function () {
+    return view('login');
+});
+
+Route::post('login', 'AuthController@login')->name('login');
+
+Route::get('test', function () {
+    return view('success');
+});
+
+Route::get('logout', 'AuthController@logout');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
