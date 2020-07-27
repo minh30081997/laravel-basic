@@ -14,13 +14,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UserSeeder::class);
-        DB::table('loaisanpham')->insert([
-            ['Ten' => 'may tinh'],
-            ['Ten' => 'dien thoai'],
-            ['Ten' => 'xe may'],
-            ['Ten' => 'o to'],            
-            ['Ten' => 'dieu hoa'],
-        ]);
+        // DB::table('loaisanpham')->insert([
+        //     ['Ten' => 'may tinh'],
+        //     ['Ten' => 'dien thoai'],
+        //     ['Ten' => 'xe may'],
+        //     ['Ten' => 'o to'],            
+        //     ['Ten' => 'dieu hoa'],
+        // ]);
+
+        $this->call(UsersSeeder::class);
+        $this->call(PostsSeeder::class);
+        $this->call(RolesSeeder::class);
 
     }
 }
