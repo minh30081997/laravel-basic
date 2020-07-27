@@ -49,6 +49,30 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
 
+    public function role()
+    {
+        return $this->belongsToMany('App\Role', 'roles_users', 'user_id', 'role_id');
+    }
+
+
+    // Check if user has access to $permissions
+    public function hasAccess(array $permissions) 
+    {
+        foreach ($this->role as $role) {
+            if ($role->hasAccess($permissions)) {
+                return true;
+            } 
+        }
+        return false;
+    }
+
+    public function inRole(string $roleSlug) 
+    {
+        return $this->role()->where('slug', $roleSlug)->count() == 1;
+    }
+
+
+
     // Accessor
     public function getNameAttribute($value)
     {
@@ -56,8 +80,8 @@ class User extends Authenticatable
     }
 
     // Mutator 
-    public function setPasswordAttribute($value) 
-    {
-        $this-> attributes['password'] = bcrypt($value);
-    }
+    // public function setPasswordAttribute($value) 
+    // {
+    //     $this-> attributes['password'] = bcrypt($value);
+    // }
 }
