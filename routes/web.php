@@ -376,3 +376,7 @@ Route::get('result', 'PostController@test');
 Route::get('test/{id}', function ($id) {
     echo $id;
 })->name('test');
+
+
+// Activation Email
+Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
