@@ -1,0 +1,1 @@
+<p>Click <a href="{{ $route }}">Vao day</a></p>

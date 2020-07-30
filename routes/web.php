@@ -12,6 +12,7 @@ use App\Comment;
 use App\LoaiSanPham;
 use App\SanPham;
 use Dotenv\Result\Success;
+use SebastianBergmann\Environment\Runtime;
 
 /*
 |--------------------------------------------------------------------------
@@ -380,3 +381,23 @@ Route::get('test/{id}', function ($id) {
 
 // Activation Email
 Route::get('user/activation/{token}', 'Auth\RegisterController@activateUser')->name('user.activate');
+
+
+// Forgot password with email
+// Solution 1: 
+Route::get('reset-password', 'ForgotPasswordController@getFormResetPassword')->name('get.reset.password');
+Route::post('reset-password', 'ForgotPasswordController@sendCodeResetPassword')->name('send.code.reset.password');
+Route::get('/password/reset', 'ForgotPasswordController@resetPassword')->name('get.link.reset.password');
+Route::post('/password/reset', 'ForgotPasswordController@saveResetPassword')->name('save.reset.password');
+
+// Solution 2:
+// Route::get('resetPassword', 'ForgotPasswordController@getForm')->name('get.form');
+// Route::post('resetPassword', 'ForgotPasswordController@sendToken')->name('send.token');
+// Route::get('reset', 'ForgotPasswordController@getReset')->name('get.reset');
+// Route::post('reset', 'ForgotPasswordController@saveReset')->name('save.reset');
+
+// Solution 3:
+Route::get('resetPassword', 'ForgotPasswordController@getForm')->name('get.form');
+Route::post('resetPassword', 'ForgotPasswordController@sendToken')->name('send.token');
+Route::get('reset', 'ForgotPasswordController@getReset')->name('get.reset');
+Route::post('reset', 'ForgotPasswordController@saveReset')->name('save.reset');

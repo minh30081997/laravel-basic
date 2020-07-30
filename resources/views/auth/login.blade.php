@@ -13,6 +13,10 @@
                         <strong>{{ session('warning') }}</strong>
                     </span>
                     @endif
+
+                    @if (session('message'))
+                    {{ session('message') }}
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
